@@ -1,0 +1,5 @@
+base_image: syscomiddleware/oracle-jdk
+image_name: syscomiddleware/oracle-soa
+tags:
+  - latest
+  - centos-12.2.1-qs

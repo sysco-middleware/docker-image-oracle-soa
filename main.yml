@@ -1,0 +1,42 @@
+- hosts: 127.0.0.1
+  connection: local
+  vars_files:
+    - vars/main.yml
+  tasks:
+    - name: create container
+      docker:
+        name: tmp-oracle-soa
+        image: "{{ base_image }}"
+        command: sleep infinity
+        volumes:
+          - "/installers/oracle/fmw/12.2/soa_qs/12.2.1:/srv/files"
+        state: started
+
+    - add_host:
+        name: tmp-oracle-soa
+        groups: docker
+        ansible_connection: docker
+
+- hosts: tmp-oracle-soa
+  connection: docker
+  roles:
+    - role: sysco-middleware.oracle-soa
+      oracle_soa_version: 12c
+      oracle_soa_quick_installation: yes
+      oracle_soa_installer: /srv/files/fmw_12.2.1.0.0_soa_quickstart.jar
+
+- hosts: 127.0.0.1
+  connection: local
+  vars_files:
+    - vars/main.yml
+  tasks:
+    - name: docker commit
+      command: "docker commit tmp-oracle-soa {{ image_name }}:{{ item }}"
+      with_items: "{{ tags }}"
+
+    - name: docker push
+      command: "docker push {{ image_name }}:{{ item }}"
+      with_items: "{{ tags }}"
+
+    - name: docker kill
+      command: "docker kill tmp-oracle-soa"
