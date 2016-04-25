@@ -34,9 +34,13 @@
       command: "docker commit tmp-oracle-soa {{ image_name }}:{{ item }}"
       with_items: "{{ tags }}"
 
-    - name: docker push
-      command: "docker push {{ image_name }}:{{ item }}"
-      with_items: "{{ tags }}"
-
     - name: docker kill
       command: "docker kill tmp-oracle-soa"
+
+    - name: docker rm
+      command: "docker rm tmp-oracle-soa"
+
+    # image should be push into a private registry
+    # - name: docker push
+    #   command: "docker push {{ image_name }}:{{ item }}"
+    #   with_items: "{{ tags }}"
