@@ -9,7 +9,7 @@
         image: "{{ base_image }}"
         command: sleep infinity
         volumes:
-          - "/installers/oracle/fmw/12.2/soa_qs/12.2.1:/srv/files"
+          - "/installers/oracle/fmw/12.1/soa_qs/12.1.3:/srv/files"
         state: started
 
     - add_host:
@@ -23,7 +23,7 @@
     - role: sysco-middleware.oracle-soa
       oracle_soa_version: 12c
       oracle_soa_quick_installation: yes
-      oracle_soa_installer: /srv/files/fmw_12.2.1.0.0_soa_quickstart.jar
+      oracle_soa_installer: /srv/files/fmw_12.1.3.0.0_soa_quickstart.jar
 
 - hosts: 127.0.0.1
   connection: local
