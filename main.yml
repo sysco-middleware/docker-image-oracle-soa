@@ -11,6 +11,8 @@
         volumes:
           - "/opt/installers/oracle/fmw/12.1/soa-qs/12.1.3:/srv/files"
         state: started
+        env:
+          JAVA_HOME: /usr/java/latest
 
     - add_host:
         name: tmp-oracle-soa
@@ -19,6 +21,11 @@
 
 - hosts: tmp-oracle-soa
   connection: docker
+  pre_tasks:
+    - file:
+        path: /tmp
+        state: directory
+        mode: "u+rwx"
   roles:
     - role: sysco-middleware.oracle-soa
       oracle_soa_version: 12c
