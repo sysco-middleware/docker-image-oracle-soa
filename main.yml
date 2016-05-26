@@ -9,7 +9,7 @@
         image: "{{ base_image }}"
         command: sleep infinity
         volumes:
-          - "/installers/oracle/fmw/12.1/soa_qs/12.1.3:/srv/files"
+          - "/opt/installers/oracle/fmw/12.1/soa-qs/12.1.3:/srv/files"
         state: started
 
     - add_host:
