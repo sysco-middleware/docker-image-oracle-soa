@@ -1,4 +1,3 @@
-base_image: syscomiddleware/oracle-jdk:centos-8
+base_image: syscomiddleware/oracle-database-instant-client:basic-12.1.0.2-jdk7-centos7
 image_name: syscomiddleware/oracle-soa
-tags:
-  - centos-12.2.1-qs
+tag: soa-qs-12.1.3-jdk7-centos7
