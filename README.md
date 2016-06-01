@@ -30,3 +30,5 @@ And run:
 ## Tags
 
 - soa-qs-12.1.3-jdk7-centos7
+
+- soa-qs-12.2.1-jdk8-centos7
