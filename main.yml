@@ -26,6 +26,9 @@
         path: /tmp
         state: directory
         mode: "u+rwx"
+    - yum:
+        name: perl-libwww-perl
+        state: latest
   roles:
     - role: sysco-middleware.oracle-soa
       oracle_soa_version: 12c
